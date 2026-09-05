@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hamed Birthday✨</title>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700;900&display=swap" rel="stylesheet" />
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --gold: #D4860A;
+      --gold-lt: #F0A820;
+      --gold-bg: #eea60a;
+      --dark: #1a1000;
+      --cream: #FDF3DC;
+      --heart: #e03030;
+    }
+
+    html,
+    body {
+      min-height: 100%;
+      font-family: 'Vazirmatn', sans-serif;
+      background: var(--gold-bg);
+      color: var(--dark);
+      overflow-x: hidden;
+    }
+
+    /* ── Falling petals ── */
+    #petals {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .petal {
+      position: absolute;
+      top: -40px;
+      font-size: 22px;
+      animation: fall linear infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.8;
+      }
+
+      100% {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
+    /* ── Wrapper ── */
+    .page {
+      position: relative;
+      z-index: 1;
+      max-width: 540px;
+      margin: 0 auto;
+      padding: 40px 24px 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+    }
+
+    /* ── Header text ── */
+    .top-label {
+      font-size: 15px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--dark);
+      opacity: 0.6;
+      font-weight: 700;
+    }
+
+    /* ── Name badge ── */
+    .name-badge {
+      position: relative;
+      display: inline-block;
+    }
+
+    .name-badge h1 {
+      font-size: clamp(52px, 14vw, 88px);
+      font-weight: 900;
+      color: var(--dark);
+      -webkit-text-stroke: 3px var(--dark);
+      paint-order: stroke fill;
+      letter-spacing: -2px;
+      line-height: 1;
+      text-shadow:
+        4px 4px 0 var(--gold-lt),
+        6px 6px 0 rgba(0, 0, 0, 0.18);
+    }
+
+    .name-badge::after {
+      content: '';
+      display: block;
+      height: 4px;
+      background: linear-gradient(90deg, transparent, var(--dark), transparent);
+      border-radius: 2px;
+      margin-top: 6px;
+    }
+
+    /* ── Photo frame ── */
+    .photo-wrap {
+      position: relative;
+      width: min(280px, 72vw);
+    }
+
+    .photo-wrap img {
+      width: 100%;
+      display: block;
+      border-radius: 6px;
+      border: 5px solid var(--dark);
+      box-shadow: 8px 8px 0 var(--dark);
+    }
+
+    .heart-pin {
+      position: absolute;
+      top: -18px;
+      left: -18px;
+      font-size: 34px;
+      animation: pulse 1.4s ease-in-out infinite;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.22);
+      }
+    }
+
+    /* ── Date card ── */
+    .date-card {
+      background: var(--dark);
+      color: var(--gold-lt);
+      border-radius: 12px;
+      padding: 18px 32px;
+      text-align: center;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+      width: 100%;
+      max-width: 320px;
+    }
+
+    .date-card .month {
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+
+    .date-card .year {
+      font-size: 14px;
+      opacity: 0.65;
+      margin-top: 4px;
+      letter-spacing: 1px;
+    }
+
+    .date-card .day-num {
+      font-size: 64px;
+      font-weight: 900;
+      line-height: 1;
+      color: var(--gold-lt);
+      text-shadow: 0 0 24px var(--gold-lt);
+    }
+
+    /* ── Message ── */
+    .message {
+      text-align: center;
+      line-height: 2;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--dark);
+      padding: 16px 20px;
+      background: rgba(255, 255, 255, 0.18);
+      border-radius: 10px;
+
+      border: 2px solid rgba(0, 0, 0, 0.12);
+      width: 100%;
+    }
+
+    .message .persian-big {
+      display: block;
+      font-size: clamp(20px, 5.5vw, 28px);
+      font-weight: 900;
+    }
+
+    .message .english-sub {
+      display: block;
+      font-size: 13px;
+      letter-spacing: 2px;
+      opacity: 0.55;
+      margin-top: 6px;
+      font-family: Georgia, serif;
+      direction: ltr;
+    }
+
+    /* ── Letter box ── */
+    .letter-box {
+      background: rgba(255, 255, 255, 0.15);
+      border: 2px solid rgba(0, 0, 0, 0.15);
+      border-radius: 14px;
+      padding: 28px 26px;
+      width: 100%;
+      font-size: 15.5px;
+      line-height: 2.1;
+      color: var(--dark);
+      position: relative;
+      backdrop-filter: blur(4px);
+    }
+
+    .letter-box::before {
+      content: '❝';
+      position: absolute;
+      top: -18px;
+      right: 22px;
+      font-size: 52px;
+      color: var(--dark);
+      opacity: 0.18;
+      font-family: Georgia, serif;
+      line-height: 1;
+    }
+
+    .letter-title {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      opacity: 0.5;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+    }
+
+    .letter-box p {
+      font-weight: 400;
+      text-align: justify;
+    }
+
+    /* ── Music player ── */
+    .music-box {
+      background: var(--dark);
+      border-radius: 14px;
+      padding: 20px 24px;
+      width: 100%;
+      max-width: 340px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    .music-box .music-label {
+      color: var(--gold-lt);
+      font-size: 13px;
+      letter-spacing: 2px;
+      opacity: 0.7;
+    }
+
+    .music-box audio {
+      width: 100%;
+      filter: invert(1) sepia(1) saturate(2) hue-rotate(10deg);
+      border-radius: 30px;
+    }
+
+    .music-note {
+      font-size: 28px;
+      animation: bounce 1.2s ease-in-out infinite alternate;
+    }
+
+    @keyframes bounce {
+      from {
+        transform: translateY(0);
+      }
+
+      to {
+        transform: translateY(-6px);
+      }
+    }
+
+    .replace-hint {
+      font-size: 11px;
+      color: var(--gold-lt);
+      opacity: 0.45;
+      text-align: center;
+      direction: ltr;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      font-size: 13px;
+      opacity: 0.45;
+      text-align: center;
+      font-weight: 400;
+    }
+
+    /* ── Entrance animation ── */
+    .page>* {
+      opacity: 0;
+      transform: translateY(28px);
+      animation: rise 0.7s ease forwards;
+    }
+
+    .page>*:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+
+    .page>*:nth-child(2) {
+      animation-delay: 0.25s;
+    }
+
+    .page>*:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    .page>*:nth-child(4) {
+      animation-delay: 0.55s;
+    }
+
+    .page>*:nth-child(5) {
+      animation-delay: 0.7s;
+    }
+
+    .page>*:nth-child(6) {
+      animation-delay: 0.85s;
+    }
+
+    .page>*:nth-child(7) {
+      animation-delay: 1.0s;
+    }
+
+    @keyframes rise {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ── Confetti burst overlay ── */
+    #confetti-canvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    #splash {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: #1a1000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      cursor: pointer;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+
+    #splash.hide {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .splash-emoji {
+      font-size: 72px;
+      animation: pulse 1.4s ease-in-out infinite;
+    }
+
+    .splash-title {
+      font-size: clamp(28px, 8vw, 48px);
+      font-weight: 900;
+      color: #F0A820;
+      text-align: center;
+      line-height: 1.4;
+      padding: 0 20px;
+      text-shadow: 0 0 30px rgba(240, 168, 32, 0.5);
+    }
+
+    .splash-btn {
+      margin-top: 10px;
+      background: #F0A820;
+      color: #1a1000;
+      border: none;
+      border-radius: 50px;
+      padding: 16px 40px;
+      font-size: 18px;
+      font-weight: 900;
+      font-family: 'Vazirmatn', sans-serif;
+      cursor: pointer;
+      animation: glow 1.8s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from {
+        box-shadow: 0 0 20px rgba(240, 168, 32, 0.3);
+      }
+
+      to {
+        box-shadow: 0 0 45px rgba(240, 168, 32, 0.8);
+      }
+    }
+
+    .splash-hint {
+      font-size: 13px;
+      color: #F0A820;
+      opacity: 0.4;
+      letter-spacing: 1px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="splash">
+    <div class="splash-emoji">🎂</div>
+    <div class="splash-title">حامد جان<br>تولدت مبارک ❤️</div>
+    <button class="splash-btn">لمس کن تا جشن شروع شه ✨</button>
+  </div>
+
+  <div id="petals"></div>
+  <canvas id="confetti-canvas"></canvas>
+
+  <div class="page">
+
+    <span class="top-label">🎂 1361/1/1 🎂</span>
+
+    <div class="name-badge">
+      <h1>حامد</h1>
+    </div>
+
+    <div class="photo-wrap">
+      <span class="heart-pin">❤️</span>
+      <!--
+      ──────────────────────────────────────────
+      برای تغییر عکس:
+      src رو به لینک یا مسیر عکس مورد نظرت تغییر بده
+      ──────────────────────────────────────────
+    -->
+      <img src="./assets/images/hamed.jpg" alt="حامد عزیز"
+        onerror="this.style.background='#c87a08';this.style.minHeight='320px'" />
+    </div>
+
+    <div class="date-card">
+      <div class="month">فروردین</div>
+      <div class="day-num">۱</div>
+      <div class="year">Farvardin 1361</div>
+    </div>
+
+    <div class="message">
+      <span class="persian-big">حامد جان تولدت هزاران بار مبارک 🎉</span>
+      <span class="english-sub">Happy Birthday, dear Hamed</span>
+    </div>
+
+
+    <div class="letter-box">
+      <div class="letter-title">💌 پیامی از ته قلب</div>
+      <p>
+        حامد جان،<br><br>
+        در این روز که سال‌ها پیش، دنیا با آمدنت رنگ دیگری گرفت،
+        می‌خواهم بگویم که داشتنت در کنارمان یکی از بزرگ‌ترین هدیه‌های زندگیست.<br><br>
+        تو آدمی هستی که آرامشت به دیگران سرایت می‌کند،
+        خنده‌ات دلگرمی می‌آورد و حضورت، هر جمعی را کامل‌تر می‌کند.<br><br>
+        امیدوارم هر روزت پر باشد از لحظه‌هایی که ارزش به خاطر سپردن دارند،
+        از آدم‌هایی که دوستشان داری و دوستت دارند،
+        و از آن آرامش عمیقی که لایقشی.<br><br>
+        سال‌های سال، سلامت و شاد باشی حامد عزیز. 🌟
+      </p>
+    </div>
+
+    <div class="music-box">
+      <span class="music-note">🎵</span>
+      <span class="music-label">آهنگ تولد</span>
+
+      <audio id="birthday-audio" controls preload="auto">
+        <source src="./Sohrab-Behrad-Tavalodet-Mobarak-Bahar-[MusicSky.IR].mp3" type="audio/mpeg" />
+
+      </audio>
+
+    </div>
+
+    <div class="footer">ساخته شده با 💖 توسط سپهر</div>
+
+  </div>
+
+  <script>
+    /* ── Falling flower petals ── */
+    const petalEl = document.getElementById('petals');
+    const symbols = ['🌸', '🌼', '🌺', '✨', '⭐', '🎊', '🎈'];
+    for (let i = 0; i < 22; i++) {
+      const p = document.createElement('span');
+      p.className = 'petal';
+      p.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+      p.style.left = Math.random() * 100 + 'vw';
+      p.style.animationDuration = (4 + Math.random() * 7) + 's';
+      p.style.animationDelay = (Math.random() * 8) + 's';
+      p.style.fontSize = (14 + Math.random() * 16) + 'px';
+      petalEl.appendChild(p);
+    }
+
+    /* ── Confetti burst on load ── */
+    const canvas = document.getElementById('confetti-canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+
+    const colors = ['#D4860A', '#F0A820', '#e03030', '#fff', '#1a1000', '#ffdd00'];
+    const pieces = Array.from({ length: 120 }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height - canvas.height,
+      r: 4 + Math.random() * 6,
+      d: 2 + Math.random() * 5,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      tilt: Math.random() * 10 - 5,
+      tiltAngle: 0,
+      tiltSpeed: 0.05 + Math.random() * 0.1,
+    }));
+
+    let frame = 0;
+    function drawConfetti() {
+      if (frame > 220) { ctx.clearRect(0, 0, canvas.width, canvas.height); return; }
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      pieces.forEach(p => {
+        p.tiltAngle += p.tiltSpeed;
+        p.y += p.d;
+        p.tilt = Math.sin(p.tiltAngle) * 12;
+        ctx.beginPath();
+        ctx.lineWidth = p.r;
+        ctx.strokeStyle = p.color;
+        ctx.moveTo(p.x + p.tilt + p.r / 2, p.y);
+        ctx.lineTo(p.x + p.tilt, p.y + p.tilt + p.r / 2);
+        ctx.stroke();
+      });
+      frame++;
+      requestAnimationFrame(drawConfetti);
+    }
+    drawConfetti();
+
+    /* ── Auto-play music after 4 seconds ── */
+    const audio = document.getElementById('birthday-audio');
+    const splash = document.getElementById('splash');
+
+    function startJourney() {
+      splash.classList.add('hide');
+      setTimeout(() => { splash.style.display = 'none'; }, 800);
+      audio.play().catch(() => { });
+    }
+
+    splash.addEventListener('click', startJourney);
+    splash.addEventListener('touchstart', startJourney, { passive: true });
+  </script>
+
+</body>
+
+</html>
